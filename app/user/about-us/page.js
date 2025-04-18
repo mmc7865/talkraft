@@ -1,10 +1,9 @@
-import Button from '@/components/Button'
+"use client"
 import React from 'react'
 
 const Aboutus = () => {
   return (
     <div>Aboutus
-        <Button/>
     </div>
   )
 }
