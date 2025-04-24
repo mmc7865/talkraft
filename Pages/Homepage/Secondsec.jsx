@@ -49,7 +49,8 @@ const ServicesSection = () => {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: 'top 80%',
-                    end:'top 30%', // Start when the top of the section hits 80% of the viewport height
+                    end:'top 30%',
+                    scrub:true // Start when the top of the section hits 80% of the viewport height
                     // markers: true, // Uncomment ONLY for debugging trigger points
                 },
             });

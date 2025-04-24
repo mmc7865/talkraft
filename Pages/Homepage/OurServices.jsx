@@ -79,7 +79,7 @@ const OurServices = () => {
                 scrollTrigger: {
                     trigger: titleSectionRef.current,
                     start: 'top 85%',
-                    toggleActions: 'play none none none',
+                    scrub:true
                     // markers: true, // For debugging
                 }
             });
@@ -96,7 +96,7 @@ const OurServices = () => {
                 scrollTrigger: {
                     trigger: cardsContainerRef.current,
                     start: 'top 80%',
-                    toggleActions: 'play none none none',
+                    scrub: true
                     // markers: true, // For debugging
                 }
             });

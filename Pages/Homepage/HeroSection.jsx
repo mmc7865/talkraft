@@ -43,7 +43,7 @@ const HeroSection = () => {
       gsap.set(imageElement, { y: 50, opacity: 0 }); // Start below
 
       // Create a GSAP timeline for better control (optional but good practice)
-      const tl = gsap.timeline({ delay: 0.3 }); // Small delay after page load/navbar anim
+      const tl = gsap.timeline({ delay: 0.3,scrub:true }); // Small delay after page load/navbar anim
 
      
 

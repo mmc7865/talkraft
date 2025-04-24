@@ -6,6 +6,7 @@ import { gsap } from 'gsap';
 // IMPORTANT: Ensure ScrollTrigger is globally registered FIRST!
 
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn, FaPaperPlane } from 'react-icons/fa';
+import Link from 'next/link';
 
 // Gallery images data (replace with your actual paths)
 const galleryImages = [
@@ -179,10 +180,10 @@ const Footer = () => {
                         {/* Social Icons */}
                         {/* Added social-btn-item class for GSAP targeting */}
                         <div className="flex pt-2 space-x-2">
-                            <a className="social-btn social-btn-item" href="#" aria-label="Twitter"><FaTwitter /></a>
-                            <a className="social-btn social-btn-item" href="https://www.facebook.com/TallkRaft" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
-                            <a className="social-btn social-btn-item" href="https://www.instagram.com/talk_raft" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-                            <a className="social-btn social-btn-item" href="https://www.linkedin.com/company/talkraft" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
+                            <Link className="social-btn social-btn-item" href="#" aria-label="Twitter"><FaTwitter /></Link>
+                            <Link className="social-btn social-btn-item" href="https://www.facebook.com/TallkRaft" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></Link>
+                            <Link className="social-btn social-btn-item" href="https://www.instagram.com/talk_raft" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></Link>
+                            <Link className="social-btn social-btn-item" href="https://www.linkedin.com/company/talkraft" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></Link>
                         </div>
                     </div>
 
