@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'; // Added useState
 import { gsap } from 'gsap';
 import { ModeToggle } from './Togglebtn'; // Assuming this component exists
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'; // Hamburger icons
+import Link from 'next/link';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
@@ -79,11 +80,11 @@ const Navbar = () => {
                         md:mx-auto // Center links on desktop between logo and right items
                     "
                 >
-                    <li className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Home</li>
-                    <li className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">About</li>
-                    <li className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Services</li>
-                    <li className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Project</li>
-                    <li className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Contact</li>
+                    <Link href={"/"} className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Home</Link>
+                    <Link href={"/user/about-us"} className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">About</Link>
+                    <Link href={"/user/services"} className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Services</Link>
+                    <Link href={"/user/projects"} className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Project</Link>
+                    <Link href={"/user/contact"} className="cursor-pointer font-medium text-black transition-colors duration-200 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400">Contact</Link>
                 </ul>
 
                 {/* Right Side Items + Mobile Menu Button */}
