@@ -18,7 +18,10 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Navbar/>
+          <div className="pt-18">  
         {children}
+          </div>
+          <div className="h-20"></div>
         <Footer/>
         </ThemeProvider>
       </body>

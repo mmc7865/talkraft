@@ -2,8 +2,6 @@
 
 import React, { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
-// IMPORTANT: Ensure ScrollTrigger is registered globally FIRST!
-
 import { FaSearch, FaLaptopCode, FaFacebookF, FaEnvelopeOpenText, FaThumbsUp, FaAndroid, FaArrowRight } from 'react-icons/fa';
 
 // Service data array
@@ -79,7 +77,6 @@ const OurServices = () => {
                 scrollTrigger: {
                     trigger: titleSectionRef.current,
                     start: 'top 85%',
-                    scrub:true
                     // markers: true, // For debugging
                 }
             });
@@ -96,8 +93,7 @@ const OurServices = () => {
                 scrollTrigger: {
                     trigger: cardsContainerRef.current,
                     start: 'top 80%',
-                    scrub: true
-                    // markers: true, // For debugging
+                  // markers: true, // For debugging
                 }
             });
 

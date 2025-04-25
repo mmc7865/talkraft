@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef, createRef } from 'react'; // Added createRef
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaEye, FaLink } from 'react-icons/fa';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'; // Import RTG
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Dummy Data & Filters (remain the same) ---
 const portfolioItemsData = [
     { id: 1, category: 'Web Design', filterClass: 'filter-web', imgSrc: '/img/portfolio-1.jpg', imgAlt: 'Digital Agency Website', title: 'Digital Agency Website Design And Development', type: 'UI / UX Design', lightboxUrl: '/img/portfolio-1.jpg', linkUrl: '#', },
     { id: 2, category: 'Graphic Design', filterClass: 'filter-graphic', imgSrc: '/img/portfolio-2.jpg', imgAlt: 'Marketing Campaign Graphics', title: 'Creative Marketing Campaign Graphics Pack', type: 'Graphic Design', lightboxUrl: '/img/portfolio-2.jpg', linkUrl: '#', },
@@ -17,15 +16,15 @@ const portfolioItemsData = [
     { id: 5, category: 'Web Design', filterClass: 'filter-web', imgSrc: '/img/portfolio-5.jpg', imgAlt: 'Mobile App Landing Page', title: 'Engaging Mobile App Landing Page Design', type: 'Web Design', lightboxUrl: '/img/portfolio-5.jpg', linkUrl: '#', },
     { id: 6, category: 'Graphic Design', filterClass: 'filter-graphic', imgSrc: '/img/portfolio-6.jpg', imgAlt: 'Social Media Content Kit', title: 'Custom Social Media Content Kit Creation', type: 'Content Design', lightboxUrl: '/img/portfolio-6.jpg', linkUrl: '#', },
 ];
+
 const filterButtons = [
     { name: 'All', filter: '*' },
     { name: 'Web Design', filter: '.filter-web' },
     { name: 'Graphic Design', filter: '.filter-graphic' },
 ];
 
-// --- Sub-component for Portfolio Item Card (for RTG nodeRef) ---
 const PortfolioItemCard = React.forwardRef(({ item, ...props }, ref) => (
-    <div ref={ref} {...props}> {/* Spread remaining props like className */}
+    <div ref={ref} {...props}>
         <div className="group rounded-lg overflow-hidden shadow-lg bg-white dark:bg-gray-800 transition-shadow duration-300 hover:shadow-xl h-full flex flex-col">
             <div className="relative overflow-hidden">
                 <img
@@ -42,7 +41,7 @@ const PortfolioItemCard = React.forwardRef(({ item, ...props }, ref) => (
                     </a>
                 </div>
             </div>
-            <div className="p-5 flex-grow"> {/* Added flex-grow */}
+            <div className="p-5 flex-grow">
                 <p className="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-1">
                     {item.type}
                 </p>
@@ -53,20 +52,17 @@ const PortfolioItemCard = React.forwardRef(({ item, ...props }, ref) => (
         </div>
     </div>
 ));
-PortfolioItemCard.displayName = "PortfolioItemCard"; // For better debugging
 
+PortfolioItemCard.displayName = "PortfolioItemCard";
 
-// --- Main Project Component ---
 const Project = () => {
     const [activeFilter, setActiveFilter] = useState('*');
     const sectionRef = useRef(null);
 
-    // --- Filtering Logic ---
     const filteredItems = portfolioItemsData.filter(item =>
         activeFilter === '*' || `.${item.filterClass}` === activeFilter
     );
 
-    // Create refs for each item for CSSTransition nodeRef
     const itemRefs = useRef({});
     filteredItems.forEach(item => {
         if (!itemRefs.current[item.id]) {
@@ -74,56 +70,43 @@ const Project = () => {
         }
     });
 
-
-    // --- GSAP Animation for Title & Filters (ScrollTrigger) ---
     useEffect(() => {
         if (!sectionRef.current) return;
         const ctx = gsap.context(() => {
-            // Animate Section Title Wrapper
             gsap.fromTo('.section-title-wrapper', { opacity: 0, y: 50 }, {
                 opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
                 scrollTrigger: { trigger: '.section-title-wrapper', start: 'top 90%', toggleActions: 'play none none none' }
             });
-            // Animate Filter List
             gsap.fromTo('.filter-list', { opacity: 0, y: 40 }, {
                 opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power3.out',
                 scrollTrigger: { trigger: '.filter-list', start: 'top 90%', toggleActions: 'play none none none' }
             });
-
-            // NOTE: Initial stagger animation for items is removed, handled by RTG now.
-
         }, sectionRef);
         return () => ctx.revert();
-    }, []); // Run only on mount
+    }, []);
 
-
-    // --- GSAP Animations for Filter Transitions (RTG Callbacks) ---
-    const animationDuration = 300; // ms, matching CSSTransition timeout
+    const animationDuration = 300;
 
     const onEnter = (node) => {
-        // Initial state before entering
         gsap.set(node, { opacity: 0, y: 40, scale: 0.95 });
     };
 
     const onEntering = (node, isAppearing) => {
-        // Animate to final state
         gsap.to(node, {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: animationDuration / 1000, // GSAP uses seconds
+            duration: animationDuration / 1000,
             ease: 'power2.out',
-            delay: isAppearing ? 0 : 0.1 // Add small delay on filter change, not initial load
+            delay: isAppearing ? 0 : 0.1
         });
     };
 
     const onExit = (node) => {
-        // Initial state before exiting (already visible)
         gsap.set(node, { opacity: 1, y: 0, scale: 1 });
     };
 
     const onExiting = (node) => {
-        // Animate out
         gsap.to(node, {
             opacity: 0,
             scale: 0.95,
@@ -135,8 +118,6 @@ const Project = () => {
     return (
         <div ref={sectionRef} className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
             <div className="max-w-5xl mx-auto">
-
-                {/* --- Section Title (remains the same) --- */}
                 <div className="section-title-wrapper mb-12 md:mb-16 text-center opacity-0 transform translate-y-10">
                     <div className="inline-flex items-center justify-center mb-4">
                          <span className="flex-shrink-0 h-1 w-12 bg-indigo-200 dark:bg-indigo-700 rounded-full"></span>
@@ -150,7 +131,6 @@ const Project = () => {
                     </h1>
                 </div>
 
-                {/* --- Filter Buttons (remains the same) --- */}
                 <div className="filter-list col-12 text-center mb-10 md:mb-12 opacity-0 transform translate-y-10">
                    <ul className="flex flex-wrap justify-center gap-2 sm:gap-3">
                         {filterButtons.map((button) => (
@@ -171,29 +151,25 @@ const Project = () => {
                     </ul>
                 </div>
 
-                {/* --- Portfolio Grid with TransitionGroup --- */}
                 <TransitionGroup
-                    component="div" // Render as a div
+                    component="div"
                     className="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
                 >
                     {filteredItems.map((item) => (
                         <CSSTransition
-                            key={item.id} // Essential for RTG tracking
-                            nodeRef={itemRefs.current[item.id]} // Pass the ref for this item
-                            timeout={animationDuration} // Duration in ms
-                            classNames="portfolio-item-anim" // Base name for CSS classes (optional if using GSAP callbacks)
+                            key={item.id}
+                            nodeRef={itemRefs.current[item.id]}
+                            timeout={animationDuration}
+                            classNames="portfolio-item-anim"
                             onEnter={onEnter}
                             onEntering={onEntering}
                             onExit={onExit}
                             onExiting={onExiting}
-                            // appear // Add this if you want the initial load to animate too
-                            unmountOnExit // Remove item from DOM when exited
+                            unmountOnExit
                         >
-                             {/* Render the sub-component, passing the ref */}
                             <PortfolioItemCard
-                                ref={itemRefs.current[item.id]} // Assign the specific ref
+                                ref={itemRefs.current[item.id]}
                                 item={item}
-                                // No need for opacity/transform classes here anymore
                             />
                         </CSSTransition>
                     ))}

@@ -50,7 +50,7 @@ const ServicesSection = () => {
                     trigger: sectionRef.current,
                     start: 'top 80%',
                     end:'top 30%',
-                    scrub:true // Start when the top of the section hits 80% of the viewport height
+                  // Start when the top of the section hits 80% of the viewport height
                     // markers: true, // Uncomment ONLY for debugging trigger points
                 },
             });
@@ -74,46 +74,45 @@ const ServicesSection = () => {
     return (
         <section
             ref={sectionRef}
-            // Use the custom background color if defined, otherwise use standard grays
-            className="py-16 px-4 bg-neumorphic-bg dark:bg-neumorphic-bg-dark transition-colors duration-300 overflow-hidden sm:px-6 lg:px-8 lg:py-24"
+            className="py-16 px-4 bg-neumorphic-bg dark:bg-neumorphic-bg-dark transition-colors duration-300 overflow-hidden sm:px-6 lg:px-8 lg:py-24 flex items-center justify-center min-h-screen"
         >
             <div className="max-w-7xl mx-auto">
-                {/* Optional Title */}
-                {/* <h2 className="text-3xl font-extrabold text-center text-gray-700 dark:text-gray-200 mb-12">Our Services</h2> */}
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl font-extrabold text-gray-700 dark:text-gray-200 mb-4">Our Services</h2>
+                    <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+                </div>
 
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 md:gap-8 lg:gap-12"> {/* Increased gap */}
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 md:gap-8 lg:gap-12 place-items-center">
                     {servicesData.map((service, index) => (
                         <div
                             key={index}
                             ref={el => cardsRef.current[index] = el}
-                            // Apply Neumorphic styles
                             className="
-                              relative
-                                p-6 rounded-2xl // Slightly larger rounding
-                                bg-neumorphic-bg dark:bg-neumorphic-bg-dark // Match section background
-                                shadow-neumorphic-light dark:shadow-neumorphic-dark // Apply custom shadows
+                                relative
+                                p-6 rounded-2xl
+                                bg-neumorphic-bg dark:bg-neumorphic-bg-dark
+                                shadow-neumorphic-light dark:shadow-neumorphic-dark
                                 transition-shadow duration-200 ease-in-out
-                                active:shadow-neumorphic-light-inset dark:active:shadow-neumorphic-dark-inset // Inset shadow on click/tap
-                                // REMOVED: hover:-translate-y-1 (often not used with neumorphism)
-                                // REMOVED: border classes
+                                active:shadow-neumorphic-light-inset dark:active:shadow-neumorphic-dark-inset
+                                max-w-sm w-full
+                                flex flex-col items-center
                             "
                         >
                             <GlowingEffect
-                            spread={60}
-                            borderWidth={1.5}
-                            glow={true}
-                            disabled={false}
-                            proximity={64}
-                            inactiveZone={0.01}
+                                spread={60}
+                                borderWidth={1.5}
+                                glow={true}
+                                disabled={false}
+                                proximity={64}
+                                inactiveZone={0.01}
                             />
-                            <div className="flex justify-center mb-5 md:justify-start">
-                                <service.icon className={`h-10 w-10 ${service.iconColor}`} aria-hidden="true" />
+                            <div className="flex justify-center mb-5">
+                                <service.icon className={`h-12 w-12 ${service.iconColor}`} aria-hidden="true" />
                             </div>
-                            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 text-center md:text-left">
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3 text-center">
                                 {service.title}
                             </h3>
-                            {/* Adjusted text color for better contrast on neumorphic backgrounds */}
-                            <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed text-center md:text-left">
+                            <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed text-center">
                                 {service.description}
                             </p>
                         </div>

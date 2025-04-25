@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-     <>
+     <div >
       <HeroSection/>
       <ServicesSection/>
       <AboutUsSection/>
@@ -18,6 +18,6 @@ export default function Home() {
       <OurServices/>
       <Project/>
       <AnimatedTestimonialsDemo/>
-     </>
+     </div>
   );
 }
